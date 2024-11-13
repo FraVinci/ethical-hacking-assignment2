@@ -7,7 +7,6 @@ def send_covert_message(target_ip, covert_message):
         #Creation of ICMP packet
         packet = IP(dst=target_ip)/ICMP(type=8)/Raw(load=bytes([byte]))
         
-        # Invio del pacchetto
         send(packet, verbose=False)
         print(f"Inviato byte: {byte} ({chr(byte)})")
 
